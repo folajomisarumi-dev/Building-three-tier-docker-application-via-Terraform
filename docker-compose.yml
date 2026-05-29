@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend_app
+    ports:
+      - "5050:5050"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://appuser:apppass@db:5432/appdb
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_app
+    ports:
+      - "5173:5173"
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+ 
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  postgres_data:

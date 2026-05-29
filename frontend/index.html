@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3 Tier App</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #0f172a;
+      color: white;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      width: 400px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    #status {
+      margin-top: 15px;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>3 Tier DevOps App</h1>
+    <p>Frontend is running 🚀</p>
+    <div id="status">Connecting to backend...</div>
+  </div>
+
+  <script>
+    fetch("http://localhost:5050/")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("status").innerText = data;
+      })
+      .catch(err => {
+        document.getElementById("status").innerText =
+          "Backend connection failed ❌";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
