@@ -22,7 +22,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Backend server is running!");
 });
 
