@@ -25,7 +25,7 @@ function App() {
         marginTop: "100px",
       }}
     >
-      <h1>Three-Tier DevOps Project</h1>
+      <h1>Three-Tier DevOps Project - CI/CD Test</h1>
 
       <h2>Frontend is running</h2>
 
